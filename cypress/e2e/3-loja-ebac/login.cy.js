@@ -42,13 +42,18 @@ describe('Funcionalidade: Login', () => {
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, auria.limabs (não é auria.limabs? Sair)')
     });
 
-    it.only('Deve fazer lgin com sucesso usando Fixture', () => {
+    it('Deve fazer lgin com sucesso usando Fixture', () => {
         cy.fixture('perfil').then(dados => {
             cy.get('#username').type(dados.usuario)
             cy.get('#password').type(dados.senha,{log: false})
             cy.get('.woocommerce-form > .button').click()
             cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, auria.limabs (não é auria.limabs? Sair)') 
         })
+    });
+
+    it.only('Deve fazer login com sucesso: usando Comandos custumizado ', () => {
+        cy.login('auria.limabs@gmail.com','teste@123')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, auria.limabs (não é auria.limabs? Sair)')
     });
 
 
